@@ -26,8 +26,7 @@ This system simulates a real spacecraft operations pipeline:
 - **python-dotenv** — secure API key management
 
 <<<<<<< HEAD
-## Project Structure
-=======
+
 ## Project Structure
 
 spacecraft-telemetry-monitor/
