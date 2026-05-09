@@ -1,0 +1,39 @@
+name: Spacecraft Monitor CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas groq python-dotenv
+
+      - name: Verify modules load
+        run: |
+          python -c "import pandas; print('pandas ok')"
+          python -c "import groq; print('groq ok')"
+          python -c "import dotenv; print('dotenv ok')"
+
+      - name: Test telemetry generator
+        run: python telemetry_generator.py
+
+      - name: Test anomaly detector
+        run: python anomaly_detector.py
